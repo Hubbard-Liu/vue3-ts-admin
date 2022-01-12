@@ -2,14 +2,15 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 17:21:37
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-11 18:20:34
+ * @LastEditTime: 2022-01-12 10:07:12
  * @FilePath: \vue3-ts-init\src\utils\request\axios\index.ts
  */
 import VAxios from './axios';
+import { BASE_URL, TIME_OUT } from './config';
 
 const http = new VAxios({
-  baseURL: process.env.VUE_APP_BASE_URL,
-  timeout: 5000,
+  baseURL: BASE_URL,
+  timeout: TIME_OUT,
   interceptors: {
     requestInterceptors: (res) => res,
     requestInterceptorsCatch: (err) => err,

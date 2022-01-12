@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 17:31:28
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-11 18:22:36
+ * @LastEditTime: 2022-01-12 09:23:57
  * @FilePath: \vue3-ts-init\src\utils\request\axios\type.ts
  */
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -17,4 +17,5 @@ export interface VAxiosInterceptors<T = AxiosResponse> {
 export interface VAxiosRequestConfig<T = AxiosResponse>
   extends AxiosRequestConfig {
   interceptors?: VAxiosInterceptors<T>;
+  showLoading?: boolean;
 }
