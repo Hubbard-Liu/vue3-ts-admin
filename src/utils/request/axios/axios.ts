@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 17:21:37
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-12 11:52:34
+ * @LastEditTime: 2022-01-12 15:20:51
  * @FilePath: \vue3-ts-init\src\utils\request\axios\axios.ts
  */
 import axios from 'axios';
@@ -65,17 +65,34 @@ class VAxios {
     );
   }
 
-  request<T>(config: VAxiosRequestConfig): Promise<T> {
+  request<T>(config: VAxiosRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
+      // 单一请求拦截
+      if (config.interceptors?.requestInterceptors) {
+        config = config.interceptors.requestInterceptors(config);
+      }
+
       this.instance
         .request<any, T>(config)
         .then((res) => {
+          // 单一响应拦截
+          if (config.interceptors?.responseInterceptors) {
+            res = config.interceptors.responseInterceptors(res);
+          }
           resolve(res);
         })
         .catch((err) => {
           reject(err);
         });
     });
+  }
+
+  get<T>(config: VAxiosRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' });
+  }
+
+  post<T>(config: VAxiosRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' });
   }
 }
 
