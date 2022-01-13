@@ -2,12 +2,11 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 14:13:10
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-11 17:19:10
+ * @LastEditTime: 2022-01-13 15:48:56
  * @FilePath: \vue3-ts-init\src\App.vue
 -->
 <template>
   <div id="app">
-    home
     <router-view></router-view>
   </div>
 </template>
@@ -21,12 +20,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+html,
+body,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
 }
 </style>
