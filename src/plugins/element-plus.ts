@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-13 15:44:44
+ * @LastEditTime: 2022-01-20 23:35:39
  * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
  */
 import type { App } from 'vue';
@@ -13,10 +13,22 @@ import {
   ElLoading,
   ElTabs,
   ElIcon,
-  ElTabPane
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput
 } from 'element-plus';
 
-const components = [ElButton, ElCard, ElTabs, ElIcon, ElTabPane];
+const components = [
+  ElButton,
+  ElCard,
+  ElTabs,
+  ElIcon,
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput
+];
 
 export default (app: App): void => {
   for (const component of components) {

@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-13 16:19:08
+ * @LastEditTime: 2022-01-20 23:42:03
  * @FilePath: \vue3-ts-init\src\views\login\login.vue
 -->
 <template>
@@ -16,7 +16,7 @@
               <span style="margin-left: 10px">Login</span>
             </span>
           </template>
-          <div>12321</div>
+          <account-number></account-number>
         </el-tab-pane>
         <el-tab-pane>
           <template #label>
@@ -25,7 +25,7 @@
               <span style="margin-left: 10px">Phone</span>
             </span>
           </template>
-          <div>12321</div>
+          <account-number></account-number>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -35,12 +35,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { Avatar, Message } from '@element-plus/icons-vue';
+import accountNumber from '@/views/login/components/account-number.vue';
 
 export default defineComponent({
   name: 'login',
   components: {
     Avatar,
-    Message
+    Message,
+    accountNumber
   },
   setup() {
     return {};
@@ -56,7 +58,7 @@ export default defineComponent({
 
   &-content {
     margin: 25vh auto;
-    width: 40vw;
+    width: 25vw;
     background-color: #fff;
   }
 
