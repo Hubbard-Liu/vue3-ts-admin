@@ -2,13 +2,16 @@
  * @Author: Do not edit
  * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-20 23:42:03
- * @FilePath: \vue3-ts-init\src\views\login\login.vue
+ * @LastEditTime: 2022-01-22 22:04:23
+ * @FilePath: /vue3-ts-init/src/views/login/login.vue
 -->
 <template>
   <div class="login">
     <div class="login-content">
       <el-tabs class="login-card" type="border-card" stretch>
+        <div class="login-avatar">
+          <el-avatar :size="50" :src="img" fit="contain"></el-avatar>
+        </div>
         <el-tab-pane>
           <template #label>
             <span>
@@ -25,7 +28,7 @@
               <span style="margin-left: 10px">Phone</span>
             </span>
           </template>
-          <account-number></account-number>
+          <account-phone></account-phone>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -36,16 +39,22 @@
 import { defineComponent } from 'vue';
 import { Avatar, Message } from '@element-plus/icons-vue';
 import accountNumber from '@/views/login/components/account-number.vue';
+import accountPhone from '@/views/login/components/account-phone.vue';
 
 export default defineComponent({
   name: 'login',
   components: {
     Avatar,
     Message,
-    accountNumber
+    accountNumber,
+    accountPhone
   },
   setup() {
-    return {};
+    const img = require('@/assets/logo.png');
+
+    return {
+      img
+    };
   }
 });
 </script>
@@ -56,9 +65,14 @@ export default defineComponent({
   background-color: #f5f5f5;
   overflow: hidden;
 
+  &-avatar {
+    display: flex;
+    justify-content: center;
+  }
+
   &-content {
     margin: 25vh auto;
-    width: 25vw;
+    width: 300px;
     background-color: #fff;
   }
 

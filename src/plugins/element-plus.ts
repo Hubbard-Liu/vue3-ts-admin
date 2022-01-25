@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-20 23:35:39
- * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
+ * @LastEditTime: 2022-01-22 21:05:03
+ * @FilePath: /vue3-ts-init/src/plugins/element-plus.ts
  */
 import type { App } from 'vue';
 import 'element-plus/dist/index.css';
@@ -16,7 +16,8 @@ import {
   ElTabPane,
   ElForm,
   ElFormItem,
-  ElInput
+  ElInput,
+  ElAvatar
 } from 'element-plus';
 
 const components = [
@@ -27,7 +28,8 @@ const components = [
   ElTabPane,
   ElForm,
   ElFormItem,
-  ElInput
+  ElInput,
+  ElAvatar
 ];
 
 export default (app: App): void => {

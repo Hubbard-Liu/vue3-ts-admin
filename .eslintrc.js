@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 14:13:10
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-11 17:33:58
- * @FilePath: \vue3-ts-init\.eslintrc.js
+ * @LastEditTime: 2022-01-23 21:17:03
+ * @FilePath: /vue3-ts-init/.eslintrc.js
  */
 module.exports = {
   root: true,
@@ -25,6 +25,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 };

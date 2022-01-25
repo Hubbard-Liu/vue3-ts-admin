@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-20 23:40:55
- * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
+ * @LastEditTime: 2022-01-25 21:14:44
+ * @FilePath: /vue3-ts-init/src/views/login/components/account-number.vue
 -->
 <template>
   <div>
@@ -12,15 +12,19 @@
       :model="account"
       :rules="accountRules"
       class="account-ruleForm"
+      :hide-required-asterisk="false"
     >
       <el-form-item
-        v-for="item in account"
+        v-for="(item, i) in account.form"
         :label="item.name"
-        :prop="item.rules"
-        :key="item.name"
+        :prop="`form[${i}].rules`"
+        :key="item.key"
         class="account-item"
       >
-        <el-input v-model="item.value"></el-input>
+        <el-input
+          v-model="item.value"
+          :placeholder="'请输入' + item.name"
+        ></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -33,18 +37,22 @@ import { rules } from '@/utils/rules';
 export default defineComponent({
   name: 'accountNumber',
   setup() {
-    const account = reactive([
-      {
-        name: '账号',
-        value: '',
-        rules: 'username'
-      },
-      {
-        name: '密码',
-        value: '',
-        rules: 'password'
-      }
-    ]);
+    const account = reactive({
+      form: [
+        {
+          name: '账号',
+          value: '',
+          rules: 'username',
+          key: '0'
+        },
+        {
+          name: '密码',
+          value: '',
+          rules: 'password',
+          key: '1'
+        }
+      ]
+    });
     const accountRules = rules;
 
     return {
@@ -57,6 +65,6 @@ export default defineComponent({
 
 <style lang="scss">
 .account-item {
-  margin-top: 30px;
+  margin: 30px 0 0;
 }
 </style>
