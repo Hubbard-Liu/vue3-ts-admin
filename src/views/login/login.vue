@@ -2,16 +2,13 @@
  * @Author: Do not edit
  * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-22 22:04:23
- * @FilePath: /vue3-ts-init/src/views/login/login.vue
+ * @LastEditTime: 2022-01-26 16:23:46
+ * @FilePath: \vue3-ts-init\src\views\login\login.vue
 -->
 <template>
   <div class="login">
     <div class="login-content">
       <el-tabs class="login-card" type="border-card" stretch>
-        <div class="login-avatar">
-          <el-avatar :size="50" :src="img" fit="contain"></el-avatar>
-        </div>
         <el-tab-pane>
           <template #label>
             <span>
@@ -50,11 +47,7 @@ export default defineComponent({
     accountPhone
   },
   setup() {
-    const img = require('@/assets/logo.png');
-
-    return {
-      img
-    };
+    return {};
   }
 });
 </script>
@@ -72,7 +65,7 @@ export default defineComponent({
 
   &-content {
     margin: 25vh auto;
-    width: 300px;
+    width: 350px;
     background-color: #fff;
   }
 

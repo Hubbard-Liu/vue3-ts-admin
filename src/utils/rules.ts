@@ -2,22 +2,28 @@
  * @Author: Do not edit
  * @Date: 2022-01-20 22:57:00
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-25 21:08:19
- * @FilePath: /vue3-ts-init/src/utils/rules.ts
+ * @LastEditTime: 2022-01-26 11:36:08
+ * @FilePath: \vue3-ts-init\src\utils\rules.ts
  */
-const rulePhone = (rule: any, value: any, callback: any): void => {
-  const reg = /^[0-9]{10}/g;
-  const isValue = Number(value);
-  if (typeof isValue !== 'number') {
-    callback(new Error('请输入正确的手机号'));
-  }
-  if (reg.test(isValue.toString())) {
-    callback(new Error('请输入正确长度的手机号'));
-  }
-  callback();
-};
+interface rulesType {
+  [key: string]: any;
+}
 
-export const rules = {
+interface itemFormType {
+  name: string;
+  code: string;
+  value: string | number;
+  rules: string;
+  type?: string;
+  key: string | number;
+}
+
+export interface rulesFormType {
+  form: itemFormType[];
+  [key: string]: any;
+}
+
+export const rules: rulesType = {
   username: [
     {
       required: true,
@@ -51,12 +57,39 @@ export const rules = {
       trigger: 'blur'
     }
   ],
+  msg: [
+    {
+      required: true,
+      message: '请输入短信验证码',
+      trigger: 'blur'
+    },
+    {
+      min: 4,
+      max: 4,
+      message: '长度为4位',
+      trigger: 'blur'
+    }
+  ],
   phone: [
     {
       required: true,
       message: '请输入手机号',
       trigger: 'blur'
     },
-    { validator: rulePhone, trigger: 'blur', required: true }
+    {
+      validator: rulePhone,
+      trigger: ['blur', 'change']
+    }
   ]
 };
+
+function rulePhone(rule: any, value: any, callback: any): void {
+  const reg = /^(?:(?:\+|00)86)?1[3-9]\d{9}$/;
+  if (value === '') {
+    callback(new Error('请输入正确的手机号'));
+  }
+  if (!reg.test(value.toString())) {
+    callback(new Error('请输入正确长度的手机号'));
+  }
+  callback();
+}

@@ -2,84 +2,140 @@
  * @Author: Do not edit
  * @Date: 2022-01-22 20:56:00
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-23 23:03:49
- * @FilePath: /vue3-ts-init/src/views/login/components/account-phone.vue
+ * @LastEditTime: 2022-01-26 18:00:01
+ * @FilePath: \vue3-ts-init\src\views\login\components\account-phone.vue
 -->
 <template>
   <div class="account-phone">
     <el-form
       ref="ruleFormRef"
       :model="account"
-      :rules="accountRules"
       class="account-ruleForm"
-      :hide-required-asterisk="false"
+      hide-required-asterisk
     >
       <el-form-item
-        v-for="item in account"
+        v-for="(item, i) in account.form"
         :label="item.name"
-        :prop="item.rules"
-        :key="item.name"
+        :prop="`form[${i}].value`"
+        :rules="accountRules[item.rules]"
+        :key="item.key"
         class="account-item"
       >
-        <el-input
-          v-model="item.value"
-          :placeholder="'请输入' + item.name"
-        ></el-input>
+        <div class="account-phone-item">
+          <el-input
+            v-model.trim="item.value"
+            :type="item.type ?? 'text'"
+            :placeholder="'请输入' + item.name"
+            autosize
+            clearable
+          ></el-input>
 
-        <el-button v-if="item.name === '验证码'">获取验证码</el-button>
+          <el-button v-if="item.code === 'msg'" style="margin: 0 10px"
+            >获取验证码</el-button
+          >
+
+          <Verify
+            v-if="item.code === 'verify'"
+            ref="verify"
+            :height="30"
+          ></Verify>
+        </div>
       </el-form-item>
+
+      <div>
+        <el-button @click="onSubmit">Log In</el-button>
+      </div>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-// import { rules } from '@/utils/rules';
+import {
+  defineComponent,
+  reactive,
+  ref,
+  computed,
+  getCurrentInstance
+} from 'vue';
+import { rules, rulesFormType } from '@/utils/rules';
+import Verify from '@/components/Verify.vue';
+import { ElForm, ElMessage as $message } from 'element-plus';
 
 export default defineComponent({
   name: 'accountPhone',
+  components: {
+    Verify
+  },
   setup() {
-    // 自定义规则
-    function rulePhone(rule: any, value: any, callback: any): void {
-      console.log(value);
+    const global = getCurrentInstance();
 
-      // const reg = /^[0-9]{10}/g;
-      // const isValue = Number(value);
-      // if (typeof isValue !== 'number') {
-      //   callback(new Error('请输入正确的手机号'));
-      // }
-      // if (reg.test(isValue.toString())) {
-      //   callback(new Error('请输入正确长度的手机号'));
-      // }
-      callback();
-    }
-    // 所有规则
-    const accountRules = {
-      phone: [
-        // {
-        //   required: true,å
-        //   message: '请输入手机号',
-        //   trigger: 'blur'
-        // },
-        { validator: rulePhone, trigger: 'blur', required: true }
+    const account: rulesFormType = reactive({
+      form: [
+        {
+          name: '手机号',
+          code: 'phone',
+          value: '',
+          rules: 'phone',
+          key: '0'
+        },
+        {
+          name: '短信验证码',
+          code: 'msg',
+          value: '',
+          rules: 'msg',
+          key: '1'
+        },
+        {
+          name: '验证码',
+          code: 'verify',
+          value: '',
+          rules: 'verify',
+          key: '2'
+        }
       ]
-    };
+    });
 
-    // 循环项
-    const account = reactive([
-      {
-        name: '手机号',
-        value: '',
-        rules: 'phone'
+    const formData = computed(() => {
+      interface paramsType {
+        [key: string]: any;
       }
-    ]);
+      const params: paramsType = {};
+      account.form.forEach((item) => {
+        params[item.code] = item.value;
+      });
+      return params;
+    });
+
+    const ruleFormRef = ref<InstanceType<typeof ElForm>>();
+
+    const accountRules = rules;
+    function onSubmit() {
+      const ref: any = global?.refs;
+      console.log('verifyRef', ref);
+
+      ruleFormRef.value?.validate((res) => {
+        // console.log(formData.value);
+
+        if (!res) return $message.warning('请填写内容');
+        $message.success('登入成功');
+        console.log('submit!', formData.value);
+      });
+    }
 
     return {
       account,
-      accountRules
+      accountRules,
+      ruleFormRef,
+      onSubmit,
+      formData
     };
   }
 });
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.account-phone-item {
+  display: flex;
+  width: 100%;
+}
+</style>

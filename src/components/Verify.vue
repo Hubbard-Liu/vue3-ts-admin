@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-12 16:34:51
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-12 16:40:46
+ * @LastEditTime: 2022-01-26 17:00:43
  * @FilePath: \vue3-ts-init\src\components\Verify.vue
 -->
 <template>
@@ -13,20 +13,25 @@
       :height="state.height"
       @click="handleDraw"
     ></canvas>
-    <div>state: {{ state.imgCode }}</div>
+    <!-- <div>state: {{ state.imgCode }}</div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref, defineProps } from 'vue';
+const props = defineProps({
+  width: Number,
+  height: Number
+});
 
 const verify = ref({} as HTMLCanvasElement);
 const state = reactive({
   pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', // 字符串
-  width: 120,
-  height: 40,
+  width: props.width || 120,
+  height: props.height || 40,
   imgCode: ''
 });
+
 onMounted(() => {
   // 初始化绘制图片验证码
   state.imgCode = draw();
@@ -124,9 +129,19 @@ const draw = () => {
   }
   return imgCode;
 };
+
+// 导出
+// 使用 <script setup> 的组件是默认关闭的，也即通过模板 ref 或者 $parent 链获取到的组件的公开实例，不会暴露任何在 <script setup> 中声明的绑定。
+// 为了在 <script setup> 组件中明确要暴露出去的属性，使用 defineExpose 编译器宏：
+// eslint-disable-next-line no-undef
+defineExpose({
+  state
+});
 </script>
+
 <style type="text/css">
 .img-verify canvas {
   cursor: pointer;
+  margin: 0 10px;
 }
 </style>
