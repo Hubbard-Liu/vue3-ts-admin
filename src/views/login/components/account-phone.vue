@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-22 20:56:00
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-26 18:00:01
+ * @LastEditTime: 2022-01-27 15:14:16
  * @FilePath: \vue3-ts-init\src\views\login\components\account-phone.vue
 -->
 <template>
@@ -36,15 +36,11 @@
 
           <Verify
             v-if="item.code === 'verify'"
-            ref="verify"
+            ref="verifyRef"
             :height="30"
           ></Verify>
         </div>
       </el-form-item>
-
-      <div>
-        <el-button @click="onSubmit">Log In</el-button>
-      </div>
     </el-form>
   </div>
 </template>
@@ -110,8 +106,8 @@ export default defineComponent({
 
     const accountRules = rules;
     function onSubmit() {
-      const ref: any = global?.refs;
-      console.log('verifyRef', ref);
+      const verifyRef: any = global?.refs?.verifyRef;
+      console.log('verifyRef', verifyRef[0].state);
 
       ruleFormRef.value?.validate((res) => {
         // console.log(formData.value);
@@ -126,8 +122,7 @@ export default defineComponent({
       account,
       accountRules,
       ruleFormRef,
-      onSubmit,
-      formData
+      onSubmit
     };
   }
 });
