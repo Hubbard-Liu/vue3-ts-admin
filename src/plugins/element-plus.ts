@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-26 15:52:16
+ * @LastEditTime: 2022-02-08 15:58:57
  * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
  */
 import type { App } from 'vue';
@@ -18,7 +18,10 @@ import {
   ElFormItem,
   ElInput,
   ElAvatar,
-  ElMessage
+  ElMessage,
+  ElRow,
+  ElCol,
+  ElCheckbox
 } from 'element-plus';
 
 const components = [
@@ -31,7 +34,10 @@ const components = [
   ElFormItem,
   ElInput,
   ElAvatar,
-  ElMessage
+  ElMessage,
+  ElRow,
+  ElCol,
+  ElCheckbox
 ];
 
 export default (app: App): void => {

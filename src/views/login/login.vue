@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-26 16:23:46
+ * @LastEditTime: 2022-02-08 17:35:51
  * @FilePath: \vue3-ts-init\src\views\login\login.vue
 -->
 <template>
@@ -17,6 +17,11 @@
             </span>
           </template>
           <account-number></account-number>
+          <el-row justify="center" style="margin-top: 15px">
+            <el-col :span="5">
+              <el-button type="primary">登录</el-button>
+            </el-col>
+          </el-row>
         </el-tab-pane>
         <el-tab-pane>
           <template #label>
@@ -26,6 +31,11 @@
             </span>
           </template>
           <account-phone></account-phone>
+          <el-row justify="center">
+            <el-col :span="5">
+              <el-button type="primary">登录</el-button>
+            </el-col>
+          </el-row>
         </el-tab-pane>
       </el-tabs>
     </div>
