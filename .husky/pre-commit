@@ -1,10 +1,3 @@
-###
- # @Author: Do not edit
- # @Date: 2022-01-11 14:13:10
- # @LastEditors: Liuyu
- # @LastEditTime: 2022-01-12 10:23:35
- # @FilePath: \vue3-ts-init\.husky\pre-commit
-###
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 . "$(dirname "$0")/common.sh"
