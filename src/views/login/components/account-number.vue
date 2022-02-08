@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-08 17:22:35
- * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
+ * @LastEditTime: 2022-02-08 22:54:20
+ * @FilePath: /vue3-ts-init/src/views/login/components/account-number.vue
 -->
 <template>
   <div class="account-number">
