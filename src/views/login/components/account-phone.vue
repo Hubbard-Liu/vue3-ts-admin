@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-22 20:56:00
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-27 15:14:16
+ * @LastEditTime: 2022-02-09 09:44:25
  * @FilePath: \vue3-ts-init\src\views\login\components\account-phone.vue
 -->
 <template>
@@ -110,18 +110,21 @@ export default defineComponent({
       console.log('verifyRef', verifyRef[0].state);
 
       ruleFormRef.value?.validate((res) => {
-        // console.log(formData.value);
-
-        if (!res) return $message.warning('请填写内容');
+        if (!res) {
+          $message.warning('请填写内容');
+          return false;
+        }
         $message.success('登入成功');
-        console.log('submit!', formData.value);
+        return true;
       });
+      return false;
     }
 
     return {
       account,
       accountRules,
       ruleFormRef,
+      formData,
       onSubmit
     };
   }

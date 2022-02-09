@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 17:21:37
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-12 15:20:51
+ * @LastEditTime: 2022-02-09 17:57:32
  * @FilePath: \vue3-ts-init\src\utils\request\axios\axios.ts
  */
 import axios from 'axios';

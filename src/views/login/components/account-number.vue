@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-08 22:54:20
- * @FilePath: /vue3-ts-init/src/views/login/components/account-number.vue
+ * @LastEditTime: 2022-02-09 17:48:24
+ * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
 -->
 <template>
   <div class="account-number">
@@ -61,6 +61,7 @@ import {
 import { rules, rulesFormType } from '@/utils/rules';
 import { ElForm, ElMessage as $message } from 'element-plus';
 import storage from '@/utils/storage';
+import store from '@/store';
 
 export default defineComponent({
   name: 'accountNumber',
@@ -71,9 +72,9 @@ export default defineComponent({
       form: [
         {
           name: '账号',
-          code: 'username',
+          code: 'name',
           value: '',
-          rules: 'username',
+          rules: 'name',
           key: '0'
         },
         {
@@ -91,11 +92,13 @@ export default defineComponent({
 
     // 表单数据
     interface paramsType {
-      [key: string]: any;
+      name: string;
+      password: string;
+      [key: string]: string;
     }
     const formData = computed({
       get() {
-        const params: paramsType = {};
+        const params: any = {};
         account.form.forEach((item) => {
           params[item.code] = item.value;
         });
@@ -141,11 +144,16 @@ export default defineComponent({
     // 表单提交
     const ruleFormRef = ref<InstanceType<typeof ElForm>>();
     function onSubmit() {
-      ruleFormRef.value?.validate((res) => {
-        if (!res) return $message.warning('请填写内容');
+      ruleFormRef.value?.validate(async (params) => {
+        if (!params) {
+          $message.warning('请填写内容');
+          return false;
+        }
+        await store.dispatch('user/login', formData.value);
         $message.success('登入成功');
-        console.log('submit!', formData.value);
+        return true;
       });
+      return false;
     }
 
     return {

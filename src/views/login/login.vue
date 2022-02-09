@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-08 23:05:50
- * @FilePath: /vue3-ts-init/src/views/login/login.vue
+ * @LastEditTime: 2022-02-09 16:41:47
+ * @FilePath: \vue3-ts-init\src\views\login\login.vue
 -->
 <template>
   <div class="login">
@@ -16,7 +16,7 @@
               <span style="margin-left: 10px">Login</span>
             </span>
           </template>
-          <account-number></account-number>
+          <account-number ref="accountNumberRef"></account-number>
         </el-tab-pane>
         <el-tab-pane name="phone">
           <template #label>
@@ -25,7 +25,7 @@
               <span style="margin-left: 10px">Phone</span>
             </span>
           </template>
-          <account-phone></account-phone>
+          <account-phone ref="accountPhoneRef"></account-phone>
         </el-tab-pane>
       </el-tabs>
       <!-- 登录按钮 -->
@@ -35,6 +35,7 @@
             type="primary"
             size="large"
             style="width: 100%"
+            :loading="isLoading"
             @click="handleLogin"
             >登录</el-button
           >
@@ -49,6 +50,7 @@ import { defineComponent, ref } from 'vue';
 import { Avatar, Message } from '@element-plus/icons-vue';
 import accountNumber from '@/views/login/components/account-number.vue';
 import accountPhone from '@/views/login/components/account-phone.vue';
+import { throttle } from 'lodash';
 
 export default defineComponent({
   name: 'login',
@@ -60,17 +62,28 @@ export default defineComponent({
   },
   setup() {
     const tabName = ref('login');
+    const isLoading = ref(false);
+    const accountNumberRef = ref<InstanceType<typeof accountNumber>>();
+    const accountPhoneRef = ref<InstanceType<typeof accountPhone>>();
 
     //登录按钮
-    function handleLogin() {
+    const handleLogin = throttle(() => {
+      isLoading.value = true;
       if (tabName.value === 'login') {
         // 账号登录
+        accountNumberRef.value?.onSubmit();
       } else {
         //手机号登录
+        accountPhoneRef.value?.onSubmit();
       }
-    }
+      isLoading.value = false;
+    }, 500);
+
     return {
       tabName,
+      isLoading,
+      accountNumberRef,
+      accountPhoneRef,
       handleLogin
     };
   }
@@ -92,10 +105,6 @@ export default defineComponent({
     margin: 25vh auto;
     width: 350px;
   }
-
-  // &-card {
-  //   height: 50vh;
-  // }
 }
 
 .el-icon {
