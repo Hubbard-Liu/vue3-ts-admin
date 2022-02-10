@@ -29,7 +29,7 @@ npm run prettier
 ## git commit
 
 ```
-npm run commit / npx cz 
+npm run commit / npx cz
 
 mac chmod ug+x .husky/*
 
