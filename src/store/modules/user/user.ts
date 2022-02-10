@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-09 14:00:15
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 17:38:03
+ * @LastEditTime: 2022-02-10 17:15:48
  * @FilePath: \vue3-ts-init\src\store\modules\user\user.ts
  */
 import { ActionContext } from 'vuex';

@@ -2,12 +2,14 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:08:32
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 16:49:54
+ * @LastEditTime: 2022-02-10 17:25:43
  * @FilePath: \vue3-ts-init\src\store\index.ts
  */
 import { InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import modules from '@/store/modules';
+import getters from './getters';
+import { RootGetters } from './getters';
 import { IStore } from './modules/types';
 
 // 定义 injection key
@@ -15,12 +17,19 @@ import { IStore } from './modules/types';
 export const key: InjectionKey<Store<IStore>> = Symbol();
 
 const store = createStore<IStore>({
-  modules
+  modules,
+  getters
 });
 
 // 定义自己的 `useStore` 组合式函数
 export function useStore() {
-  return baseUseStore(key);
+  const { state, getters, commit, dispatch } = baseUseStore(key);
+  return {
+    state,
+    getters: getters as RootGetters,
+    commit,
+    dispatch
+  };
 }
 
 // 导出的 store 在组件中使用 可以得到类型化的 如：store.state.user ...

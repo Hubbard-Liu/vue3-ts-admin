@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 17:48:24
+ * @LastEditTime: 2022-02-10 17:12:48
  * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
 -->
 <template>

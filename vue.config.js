@@ -2,10 +2,10 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:49:24
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 15:53:05
+ * @LastEditTime: 2022-02-10 10:27:00
  * @FilePath: \vue3-ts-init\vue.config.js
  */
-const port = 1234;
+const port = 2222;
 
 module.exports = {
   /**
@@ -34,10 +34,10 @@ module.exports = {
   devServer: {
     port: port,
     // open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
+    // overlay: {
+    //   warnings: false,
+    //   errors: true
+    // }
     //  http://xxx.com:80 (80可以省略不写,所有的没有显示端口的域名都是80端口)
     // 跨域 :  协议  域名  端口 任意一个不同 就会产生跨域
     // 浏览器的同源策略导致的 在页面中 通过js语法访问其他域的数据会被限制
@@ -49,16 +49,19 @@ module.exports = {
     //         .  https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS
     //     - b.后台配置nginx
 
-    // proxy: {
-    //   // 配置代理 希望拦截当前的host地址 替换为目标地址
-    //   // key: {}   ;  key为拦截的规则,可以是正则表达式
-    //   '^/(login|users)': {
-    //     target: ' http://leju.bufan.cloud', // 8080可以省略不写 所以代理地址和当前项目不是同一个地址!!
-    //     changeOrigin: true, // 如果是跨域 需要添加
-    //     pathRewrite: {
-    //       // ['/xxx']: '/yyy'
-    //     }
-    //   }
-    // }
+    proxy: {
+      // 配置代理 希望拦截当前的host地址 替换为目标地址
+      // key: {}   ;  key为拦截的规则,可以是正则表达式
+      '^/(api)': {
+        target: 'http://152.136.185.210:5000', // 8080可以省略不写 所以代理地址和当前项目不是同一个地址!!
+        changeOrigin: true, // 如果是跨域 需要添加
+        pathRewrite: {
+          // 当访问 拦截的规则 时，修改路径, 如开发设置axios base接口路径 /api
+          '^/api': ''
+          // '^/api': '/api'   // 这种接口配置出来     http://XX.XX.XX.XX:5000/api/login
+          //'^/api': '/' 这种接口配置出来     http://XX.XX.XX.XX:5000/login
+        }
+      }
+    }
   }
 };
