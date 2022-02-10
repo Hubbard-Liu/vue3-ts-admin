@@ -29,7 +29,10 @@ npm run prettier
 ## git commit
 
 ```
-npm run commit / npx cz
+npm run commit / npx cz 
+
+mac chmod ug+x .husky/*
+
 ```
 
 1. Select type 选择修改类型
