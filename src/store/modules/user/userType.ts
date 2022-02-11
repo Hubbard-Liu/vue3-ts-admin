@@ -1,8 +1,8 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-09 15:06:45
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 16:32:10
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-11 09:56:41
  * @FilePath: \vue3-ts-init\src\store\modules\user\userType.ts
  */
 export type userInfoType = {
@@ -13,4 +13,5 @@ export type userInfoType = {
 export type stateUserType = {
   token: string;
   userInfo: userInfoType;
+  userMenu: any[];
 };

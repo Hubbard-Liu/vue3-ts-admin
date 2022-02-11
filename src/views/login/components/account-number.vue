@@ -1,8 +1,8 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-10 17:12:48
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-11 16:36:51
  * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
 -->
 <template>
@@ -62,10 +62,13 @@ import { rules, rulesFormType } from '@/utils/rules';
 import { ElForm, ElMessage as $message } from 'element-plus';
 import storage from '@/utils/storage';
 import store from '@/store';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'accountNumber',
   setup() {
+    const router = useRouter();
+
     // 数据
     const account: rulesFormType = reactive({
       // 表单项
@@ -144,14 +147,26 @@ export default defineComponent({
     // 表单提交
     const ruleFormRef = ref<InstanceType<typeof ElForm>>();
     function onSubmit() {
-      ruleFormRef.value?.validate(async (params) => {
+      ruleFormRef.value?.validate((params) => {
         if (!params) {
           $message.warning('请填写内容');
           return false;
         }
-        await store.dispatch('user/login', formData.value);
-        $message.success('登入成功');
-        return true;
+        store
+          .dispatch('user/login', formData.value)
+          .then(() => {
+            // 存储成功的账号密码
+            if (account.rememberPassword) {
+              storage.set('auth', formData.value);
+            }
+            $message.success('登录成功');
+            router.replace('/');
+            return true;
+          })
+          .catch(() => {
+            $message.error('账号或密码错误!');
+            return false;
+          });
       });
       return false;
     }

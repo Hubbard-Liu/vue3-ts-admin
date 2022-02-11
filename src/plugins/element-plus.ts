@@ -1,8 +1,8 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-08 15:58:57
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-11 16:54:20
  * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
  */
 import type { App } from 'vue';
@@ -21,7 +21,12 @@ import {
   ElMessage,
   ElRow,
   ElCol,
-  ElCheckbox
+  ElCheckbox,
+  ElHeader,
+  ElAside,
+  ElMain,
+  ElFooter,
+  ElContainer
 } from 'element-plus';
 
 const components = [
@@ -37,7 +42,12 @@ const components = [
   ElMessage,
   ElRow,
   ElCol,
-  ElCheckbox
+  ElCheckbox,
+  ElHeader,
+  ElAside,
+  ElMain,
+  ElFooter,
+  ElContainer
 ];
 
 export default (app: App): void => {

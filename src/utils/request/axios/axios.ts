@@ -1,8 +1,8 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 17:21:37
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 17:57:32
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-11 11:43:39
  * @FilePath: \vue3-ts-init\src\utils\request\axios\axios.ts
  */
 import axios from 'axios';
@@ -15,7 +15,7 @@ import { checkStatus } from '@/utils/request/axios/checkStatus';
 class VAxios {
   instance: AxiosInstance;
   interceptors?: VAxiosInterceptors;
-  showLoading?: boolean;
+  showLoading: boolean;
   loading?: LoadingInstance;
 
   constructor(config: VAxiosRequestConfig) {
@@ -50,11 +50,11 @@ class VAxios {
     this.instance.interceptors.response.use(
       (res) => {
         this.loading?.close();
-        const { data } = res;
-        if (!data) {
-          checkStatus(400);
-          return Promise.reject(new Error(res.toString()));
-        }
+        // const { data } = res;
+        // if (!data) {
+        //   checkStatus(400);
+        //   return Promise.reject(new Error(res.toString()));
+        // }
         return res.data;
       },
       (err) => {

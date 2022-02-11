@@ -1,8 +1,8 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 15:08:32
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-10 17:25:43
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-11 16:25:54
  * @FilePath: \vue3-ts-init\src\store\index.ts
  */
 import { InjectionKey } from 'vue';
@@ -26,10 +26,15 @@ export function useStore() {
   const { state, getters, commit, dispatch } = baseUseStore(key);
   return {
     state,
-    getters: getters as RootGetters,
+    getters: getters as RootGetters, // 类型推导无效？
     commit,
     dispatch
   };
+}
+
+// 初始化
+export function setupStore() {
+  store.dispatch('user/loadLocalLogin');
 }
 
 // 导出的 store 在组件中使用 可以得到类型化的 如：store.state.user ...
