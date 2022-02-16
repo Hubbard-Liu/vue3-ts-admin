@@ -1,12 +1,12 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-16 16:28:44
- * @FilePath: \vue3-ts-init\src\layout\components\AppMain\AppMain.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-16 21:10:37
+ * @FilePath: /vue3-ts-init/src/layout/components/AppMain/AppMain.vue
 -->
 <template>
-  <div class="AppMain"></div>
+  <div class="AppMain">main</div>
 </template>
 
 <script lang="ts">

@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 14:13:10
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-01-22 20:34:18
+ * @LastEditTime: 2022-02-16 21:43:11
  * @FilePath: /vue3-ts-init/src/App.vue
 -->
 <template>
@@ -20,10 +20,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-}
+@import '@/styles/index.scss';
 </style>

@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 16:54:20
- * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-16 22:04:07
+ * @FilePath: /vue3-ts-init/src/plugins/element-plus.ts
  */
 import type { App } from 'vue';
 import 'element-plus/dist/index.css';
@@ -26,7 +26,11 @@ import {
   ElAside,
   ElMain,
   ElFooter,
-  ElContainer
+  ElContainer,
+  ElSubMenu,
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 } from 'element-plus';
 
 const components = [
@@ -47,7 +51,11 @@ const components = [
   ElAside,
   ElMain,
   ElFooter,
-  ElContainer
+  ElContainer,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 ];
 
 export default (app: App): void => {

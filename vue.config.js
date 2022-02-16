@@ -2,8 +2,8 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:49:24
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-10 10:27:00
- * @FilePath: \vue3-ts-init\vue.config.js
+ * @LastEditTime: 2022-02-16 21:52:06
+ * @FilePath: /vue3-ts-init/vue.config.js
  */
 const port = 2222;
 
@@ -30,6 +30,16 @@ module.exports = {
   publicPath: './',
   outputDir: 'dist',
   lintOnSave: true,
+  css: {
+    loaderOptions: {
+      // 配置全局scss 不需要引入
+      scss: {
+        // @/ 是 src/ 的别名
+        prependData:
+          '@import "./src/styles/mixin.scss";@import "./src/styles/global.scss";' // 此处为scss的位置
+      }
+    }
+  },
   // productionSourceMap: false,
   devServer: {
     port: port,

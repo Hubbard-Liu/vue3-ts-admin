@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-01-13 10:10:49
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 16:57:05
- * @FilePath: \vue3-ts-init\src\views\main\home.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-16 21:06:46
+ * @FilePath: /vue3-ts-init/src/views/main/home.vue
 -->
 <template>
   <div class="common-layout">
@@ -28,29 +28,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.common-layout .el-header,
-.common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 60px;
-}
-.common-layout .el-footer {
-  line-height: 60px;
-}
-
-.common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 200px;
-}
-
-.common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 160px;
-}
-</style>
+<style lang="scss"></style>

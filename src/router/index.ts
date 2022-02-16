@@ -1,13 +1,14 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 14:52:12
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 16:45:00
- * @FilePath: \vue3-ts-init\src\router\index.ts
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-16 21:06:23
+ * @FilePath: /vue3-ts-init/src/router/index.ts
  */
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouterGuards } from './permission';
+import layout from '@/layout/index.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,8 +26,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'home',
     path: '/',
-    component: () =>
-      import(/* webpackChunkName: "home" */ '@/views/main/home.vue')
+    component: layout
   },
   {
     path: '/:pathMatch(.*)*',
