@@ -2,17 +2,23 @@
  * @Author: Do not edit
  * @Date: 2022-02-11 14:23:40
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 16:14:02
+ * @LastEditTime: 2022-02-16 15:16:25
  * @FilePath: \vue3-ts-init\src\router\permission.ts
  */
 import { Router } from 'vue-router';
 import store from '@/store';
 import { ElMessage } from 'element-plus';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+NProgress.configure({ showSpinner: false });
 
 const whiteList = ['/login', '/404'];
 
 export function createRouterGuards(router: Router) {
   router.beforeEach((to, from, next) => {
+    NProgress.start();
+
     const token = store.getters.token;
 
     if (token) {
@@ -42,5 +48,14 @@ export function createRouterGuards(router: Router) {
         next({ path: '/login' });
       }
     }
+  });
+
+  router.afterEach(() => {
+    // to, from, failure
+    NProgress.done();
+  });
+
+  router.onError((error) => {
+    console.log(error, '路由错误');
   });
 }
