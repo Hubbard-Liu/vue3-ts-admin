@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-16 21:10:37
+ * @LastEditTime: 2022-02-17 22:54:35
  * @FilePath: /vue3-ts-init/src/layout/components/AppMain/AppMain.vue
 -->
 <template>
@@ -20,4 +20,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.AppMain {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+</style>
