@@ -1,15 +1,15 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:29:19
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-17 22:52:35
- * @FilePath: /vue3-ts-init/src/layout/components/Sidebar/Sidebar.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-18 17:29:59
+ * @FilePath: \vue3-ts-init\src\layout\components\Sidebar\Sidebar.vue
 -->
 <template>
-  <div class="Sidebar">
+  <el-scrollbar class="Sidebar">
     <el-menu
       default-active="2"
-      class="el-menu-vertical-demo"
+      class="el-menu-vertical"
       active-text-color="#669dfc"
       background-color="#3e4556"
       text-color="#fff"
@@ -34,7 +34,7 @@
         <el-menu-item index="2-2">item one</el-menu-item>
       </el-sub-menu>
     </el-menu>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script lang="ts">
@@ -54,7 +54,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.Sidebar {
+  width: 100%;
+  overflow-x: hidden !important;
+  background-color: #3e4556;
+}
+
+.el-scrollbar {
+  height: 100%;
+}
+
 .el-menu {
   border-right-width: 0;
+
+  &:not(.el-menu--collapse) {
+    // 这里是解决点击收起展开按钮时的文字卡顿现象
+    width: $sidebar-width;
+  }
 }
 </style>

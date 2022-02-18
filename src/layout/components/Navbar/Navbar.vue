@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:57
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-17 23:08:12
- * @FilePath: /vue3-ts-init/src/layout/components/Navbar/Navbar.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-18 15:31:47
+ * @FilePath: \vue3-ts-init\src\layout\components\Navbar\Navbar.vue
 -->
 <template>
   <div class="Navbar">
@@ -11,7 +11,6 @@
       <expand v-if="isCollapse" />
       <fold v-else />
     </el-icon>
-
     <div>个人信息</div>
   </div>
 </template>
