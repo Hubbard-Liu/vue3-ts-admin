@@ -1,16 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-10 20:37:45
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 15:18:30
- * @FilePath: \vue3-ts-init\src\views\login\login.vue
--->
-<!--
- * @Author: Do not edit
- * @Date: 2022-01-13 10:01:16
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-09 16:41:47
- * @FilePath: \vue3-ts-init\src\views\login\login.vue
+ * @LastEditTime: 2022-02-20 17:25:23
+ * @FilePath: /vue3-ts-init/src/views/login/login.vue
 -->
 <template>
   <div class="login">

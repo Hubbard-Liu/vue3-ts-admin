@@ -1,17 +1,19 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 15:29:03
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-18 17:31:48
- * @FilePath: \vue3-ts-init\src\layout\index.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-20 17:22:33
+ * @FilePath: /vue3-ts-init/src/layout/index.vue
 -->
 <template>
-  <div :class="['layout', !isCollapse ? 'hidden' : '']">
+  <div class="layout" :class="{ hidden: !isCollapse }">
     <div class="layout-sidebar">
       <Sidebar :isCollapse="isCollapse"></Sidebar>
     </div>
     <div class="layout-main">
-      <Navbar @handleCollapseChange="handleCollapseChange"></Navbar>
+      <div class="layout-main-navbar">
+        <Navbar @handleCollapseChange="handleChange"></Navbar>
+      </div>
       <AppMain></AppMain>
     </div>
   </div>
@@ -27,12 +29,12 @@ export default defineComponent({
   setup() {
     const isCollapse = ref(true);
 
-    const handleCollapseChange = (value: boolean) => {
+    const handleChange = (value: boolean) => {
       isCollapse.value = value;
     };
 
     return {
-      handleCollapseChange,
+      handleChange,
       isCollapse
     };
   }
@@ -53,7 +55,7 @@ export default defineComponent({
     bottom: 0;
     left: 0;
     font-size: 0px;
-    width: $sidebar-width;
+    width: $sidebarWidth;
     height: 100%;
     transition: width 0.28s;
     overflow: hidden;
@@ -63,9 +65,14 @@ export default defineComponent({
     position: relative;
     top: 0;
     left: 0;
-    width: calc(100% - $sidebar-width);
-    margin-left: $sidebar-width;
-    transition: all 0.28s;
+    width: calc(100% - $sidebarWidth);
+    margin-left: $sidebarWidth;
+    transition: width 0.28s, margin-left 0.28s;
+
+    &-navbar {
+      position: relative;
+      box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+    }
   }
 }
 

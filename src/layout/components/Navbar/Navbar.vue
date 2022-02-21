@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:57
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-18 15:31:47
- * @FilePath: \vue3-ts-init\src\layout\components\Navbar\Navbar.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-20 15:28:52
+ * @FilePath: /vue3-ts-init/src/layout/components/Navbar/Navbar.vue
 -->
 <template>
   <div class="Navbar">
@@ -17,11 +17,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { Expand, Fold } from '@element-plus/icons-vue';
 
 export default defineComponent({
   name: 'Navbar',
-  components: { Expand, Fold },
   emits: ['handleCollapseChange'],
   setup(props, { emit }) {
     const isCollapse = ref(true);
@@ -44,8 +42,12 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: $navbarHeight;
+  background-color: #fff;
   padding: 0 10px;
-  box-shadow: 0 1px 2px 0 rgba($color: #000000, $alpha: 0.1);
+}
+
+.el-icon {
+  cursor: pointer;
 }
 </style>

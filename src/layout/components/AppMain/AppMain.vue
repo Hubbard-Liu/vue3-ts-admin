@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
  * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-17 22:54:35
+ * @LastEditTime: 2022-02-20 15:29:56
  * @FilePath: /vue3-ts-init/src/layout/components/AppMain/AppMain.vue
 -->
 <template>
@@ -26,6 +26,8 @@ export default defineComponent({
   justify-content: center;
   padding: 10px;
   width: 100%;
+  height: calc(100vh - $navbarHeight);
+  background-color: #fff;
   overflow: hidden;
 }
 </style>

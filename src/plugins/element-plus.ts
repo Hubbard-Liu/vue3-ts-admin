@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-18 17:09:57
- * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-20 14:53:09
+ * @FilePath: /vue3-ts-init/src/plugins/element-plus.ts
  */
 import type { App } from 'vue';
 import 'element-plus/dist/index.css';
@@ -33,6 +33,7 @@ import {
   ElMenuItemGroup,
   ElScrollbar
 } from 'element-plus';
+import * as ElIcons from '@element-plus/icons-vue';
 
 const components = [
   ElButton,
@@ -63,6 +64,9 @@ const components = [
 export default (app: App): void => {
   for (const component of components) {
     app.use(component);
+  }
+  for (const icon in ElIcons) {
+    app.component(icon, (ElIcons as any)[icon]);
   }
   app.config.globalProperties.$loading = ElLoading;
   //全局方法调用
