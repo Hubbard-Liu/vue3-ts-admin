@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-11 14:23:40
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-16 15:16:25
- * @FilePath: \vue3-ts-init\src\router\permission.ts
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-22 20:48:32
+ * @FilePath: /vue3-ts-init/src/router/permission.ts
  */
 import { Router } from 'vue-router';
 import store from '@/store';
@@ -24,6 +24,7 @@ export function createRouterGuards(router: Router) {
     if (token) {
       if (to.path === '/login') {
         next({ path: '/' });
+        return;
       }
 
       // 判断菜单权限是否存在
