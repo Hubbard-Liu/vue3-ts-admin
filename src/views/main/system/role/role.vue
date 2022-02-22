@@ -1,0 +1,24 @@
+<!--
+ * @Author: Do not edit
+ * @Date: 2022-02-22 17:02:58
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-22 17:04:03
+ * @FilePath: \vue3-ts-init\src\views\main\system\role\role.vue
+-->
+<template>
+  <div class="role">role</div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'role',
+
+  setup() {
+    return {};
+  }
+});
+</script>
+
+<style scoped></style>
