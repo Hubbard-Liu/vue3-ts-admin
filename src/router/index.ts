@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 14:52:12
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-22 23:30:23
- * @FilePath: /vue3-ts-init/src/router/index.ts
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-23 16:38:01
+ * @FilePath: \vue3-ts-init\src\router\index.ts
  */
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw } from 'vue-router';
@@ -12,10 +12,8 @@ import layout from '@/layout/index.vue';
 
 const routes: RouteRecordRaw[] = [
   {
-    name: 'NotFound',
-    path: '/404',
-    component: () =>
-      import(/* webpackChunkName: "404" */ '@/views/error/404.vue')
+    path: '/',
+    redirect: '/main'
   },
   {
     name: 'login',
@@ -24,14 +22,23 @@ const routes: RouteRecordRaw[] = [
       import(/* webpackChunkName: "login" */ '@/views/login/login.vue')
   },
   {
-    name: 'home',
-    path: '/',
-    component: layout
+    name: 'main',
+    path: '/main',
+    component: layout,
+    children: []
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/404'
+    name: 'NotFound',
+    path: '/404',
+    component: () =>
+      import(/* webpackChunkName: "404" */ '@/views/error/404.vue')
   }
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   redirect: '/404',
+  //   component: () =>
+  //     import(/* webpackChunkName: "404" */ '@/views/error/404.vue')
+  // }
 ];
 
 const router = createRouter({

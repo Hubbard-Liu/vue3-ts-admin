@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-09 14:00:15
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-22 17:17:35
+ * @LastEditTime: 2022-02-23 17:39:36
  * @FilePath: \vue3-ts-init\src\store\modules\user\user.ts
  */
 import { ActionContext } from 'vuex';
@@ -12,6 +12,7 @@ import { API_Login } from '@/api/login/login'; // API_Menu
 import { loginType } from '@/api/login/loginType';
 import storage from '@/utils/storage';
 import formatRouter from '@/utils/formatRouter';
+import router from '@/router';
 
 // 用户信息
 const getDefaultState = (): stateUserType => {
@@ -85,6 +86,7 @@ const actions = {
   async getMenu({ commit }: ActionContext<stateUserType, IStore>) {
     try {
       // const { data: res } = await API_Menu();
+
       const res = [
         {
           id: 38,
@@ -439,8 +441,24 @@ const actions = {
           ]
         }
       ];
-      formatRouter();
+
+      // 路由表处理
+      const routeList = formatRouter(res);
+
+      // 合并路由
+      routeList.forEach((item) => {
+        router.addRoute('main', item);
+      });
+
+      // 最后动态添加404跳转,静态添加的404有优先权导致直接匹配不到就404
+      router.addRoute({
+        path: '/:pathMatch(.*)*',
+        redirect: '/404'
+      });
+
+      // 生成动态menu
       commit('SET_USER_MENU', res);
+
       return Promise.resolve(res);
     } catch (err) {
       return Promise.reject(err);

@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 14:13:10
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 16:26:49
+ * @LastEditTime: 2022-02-23 16:08:29
  * @FilePath: \vue3-ts-init\src\main.ts
  */
 import { createApp } from 'vue';

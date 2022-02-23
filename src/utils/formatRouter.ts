@@ -1,45 +1,27 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-22 17:08:50
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-22 23:59:35
- * @FilePath: /vue3-ts-init/src/utils/formatRouter.ts
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-23 15:40:35
+ * @FilePath: \vue3-ts-init\src\utils\formatRouter.ts
  */
-export default function formatRouter() {
-  const menuList = [
-    {
-      id: 38,
-      name: '系统总览',
-      type: 1,
-      url: '/main/analysis',
-      icon: 'el-icon-monitor',
-      sort: 1,
-      children: [
-        {
-          id: 39,
-          url: '/main/analysis/overview',
-          name: '核心技术',
-          sort: 106,
-          type: 2,
-          children: null,
-          parentId: 38
-        },
-        {
-          id: 40,
-          url: '/main/analysis/dashboard',
-          name: '商品统计',
-          sort: 107,
-          type: 2,
-          children: null,
-          parentId: 38
-        }
-      ]
-    }
-  ];
+import type { RouteRecordRaw } from 'vue-router';
+interface IMenu {
+  id?: number;
+  name?: string;
+  type?: number;
+  url?: string | null;
+  icon?: string;
+  sort?: number | null;
+  parentId?: number;
+  permission?: string;
+  children?: IMenu[] | null;
+}
 
+export default function formatRouter(menuList: IMenu[]) {
   // 1.获取全局路由
   const RouterKeys = require.context('../router/main', true, /\.ts$/);
-  const allRouter: any[] = [];
+  const allRouter: RouteRecordRaw[] = [];
   RouterKeys.keys().forEach((item) => {
     const route = require(`@/router/main${item.split('.')[1]}.ts`);
     allRouter.push(route.default);
@@ -47,7 +29,8 @@ export default function formatRouter() {
 
   // 2.路由权限过滤
   const routes = formatMenu(menuList);
-  console.log(routes);
+
+  return routes;
 
   // 方案一  需要require组件的方式
   // function formatMenu(menuList: any) {
@@ -72,14 +55,13 @@ export default function formatRouter() {
   // }
 
   // 方案二
-  function formatMenu(menuList: any, routes: any[] = []) {
-    menuList.forEach((item: any) => {
+  function formatMenu(menuList: IMenu[], routes: RouteRecordRaw[] = []) {
+    menuList.forEach((item: IMenu) => {
       if (item.children) {
         formatMenu(item.children, routes);
-      } else {
-        const route = allRouter.find((route) => route.path === item.url);
-        routes.push(route);
       }
+      const route = allRouter.find((route) => route.path === item.url);
+      if (route) routes.push(route);
     });
     return routes;
   }

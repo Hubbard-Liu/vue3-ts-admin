@@ -1,12 +1,14 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-20 15:29:56
- * @FilePath: /vue3-ts-init/src/layout/components/AppMain/AppMain.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-23 14:09:14
+ * @FilePath: \vue3-ts-init\src\layout\components\AppMain\AppMain.vue
 -->
 <template>
-  <div class="AppMain">main</div>
+  <div class="AppMain">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">

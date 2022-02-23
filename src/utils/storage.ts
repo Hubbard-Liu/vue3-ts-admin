@@ -1,8 +1,8 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-08 14:15:41
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-08 17:00:21
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-23 15:40:08
  * @FilePath: \vue3-ts-init\src\utils\storage.ts
  */
 // 默认缓存期限
@@ -43,7 +43,7 @@ class Storage {
         if (Date.now() <= expire || expire === null) {
           return value;
         }
-        this.remove(this.getKey(key));
+        this.remove(key);
         return null;
       } catch (err) {
         return null;
