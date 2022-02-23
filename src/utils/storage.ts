@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-08 14:15:41
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 15:40:08
- * @FilePath: \vue3-ts-init\src\utils\storage.ts
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-02-23 21:12:45
+ * @FilePath: /vue3-ts-init/src/utils/storage.ts
  */
 // 默认缓存期限
 const DEFAULT_CACHE_TIME = 1000 * 60 * 60 * 24 * 7;
@@ -53,6 +53,12 @@ class Storage {
 
   remove(key: string) {
     storage.removeItem(this.getKey(key));
+  }
+
+  clearUserInfo() {
+    storage.removeItem(this.getKey('token'));
+    storage.removeItem(this.getKey('userInfo'));
+    storage.removeItem(this.getKey('userMenu'));
   }
 
   clear() {
