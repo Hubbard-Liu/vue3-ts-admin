@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-02-09 14:00:15
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-23 22:16:13
- * @FilePath: /vue3-ts-init/src/store/modules/user/user.ts
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-24 10:34:41
+ * @FilePath: \vue3-ts-init\src\store\modules\user\user.ts
  */
 import { ActionContext } from 'vuex';
 import { IStore } from '@/store/modules/types';
@@ -474,6 +474,7 @@ const actions = {
         commit('RESET_STATE');
         storage.clearUserInfo();
         // 清空权限
+        // https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E5%88%A0%E9%99%A4%E8%B7%AF%E7%94%B1
         router.addRoute({
           name: 'main',
           path: '/main',

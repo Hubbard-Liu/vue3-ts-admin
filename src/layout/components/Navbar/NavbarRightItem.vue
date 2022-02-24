@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-23 15:10:00
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-23 21:45:12
- * @FilePath: /vue3-ts-init/src/layout/components/Navbar/NavbarRightItem.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-24 11:14:19
+ * @FilePath: \vue3-ts-init\src\layout\components\Navbar\NavbarRightItem.vue
 -->
 <template>
   <div class="NavbarRightItem">
@@ -14,8 +14,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import store from '@/store';
-import { ElMessage } from 'element-plus';
 import router from '@/router';
+import { ElMessage } from 'element-plus';
 
 export default defineComponent({
   name: 'NavbarRightItem',

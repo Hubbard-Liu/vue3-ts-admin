@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 17:21:37
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-11 14:05:36
+ * @LastEditTime: 2022-02-24 10:36:43
  * @FilePath: \vue3-ts-init\src\utils\request\axios\index.ts
  */
 import VAxios from './axios';
@@ -12,6 +12,7 @@ import store from '@/store';
 const http = new VAxios({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
+  // withCredentials: true,// 是否跨域携带cookie
   interceptors: {
     requestInterceptors: (res) => {
       const token: string = store.getters.token;

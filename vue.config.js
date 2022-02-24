@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:49:24
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 14:06:29
+ * @LastEditTime: 2022-02-24 15:18:48
  * @FilePath: \vue3-ts-init\vue.config.js
  */
 const port = 2222;
@@ -27,7 +27,7 @@ module.exports = {
   //       ii) 前台发送的是相对请求,改成绝对地址 axios.baseURL
 
   // 打包的时候用  参照后台的命名空间
-  // publicPath: './',
+  // publicPath: './', 需要改成publicPath: process.env.NODE_ENV === "production" ? "./" : "/"
   outputDir: 'dist',
   lintOnSave: true,
   css: {
