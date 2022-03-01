@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:29:19
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-01 11:41:36
- * @FilePath: \vue3-ts-init\src\layout\components\Sidebar\Sidebar.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-01 21:05:05
+ * @FilePath: /vue3-ts-init/src/layout/components/Sidebar/Sidebar.vue
 -->
 <template>
   <el-scrollbar class="Sidebar">
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 import store from '@/store';
 import SidebarItemVue from './SidebarItem.vue';
 import { useRoute } from 'vue-router';

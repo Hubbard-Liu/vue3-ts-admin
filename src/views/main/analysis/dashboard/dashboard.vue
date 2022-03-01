@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-01 17:46:17
- * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-01 21:24:50
+ * @FilePath: /vue3-ts-init/src/views/main/analysis/dashboard/dashboard.vue
 -->
 <template>
   <div class="dashboard">
@@ -67,31 +67,11 @@ export default defineComponent({
           label: '密码',
           code: 'password',
           type: 'text'
-        },
-        {
-          label: '密码2',
-          code: 'dsd',
-          type: 'text',
-          rules: [
-            {
-              required: true,
-              message: '请输入验证码',
-              trigger: 'blur'
-            }
-          ]
-        },
-        {
-          label: '密码3',
-          code: 'qwe',
-          type: 'text'
-        },
-        {
-          label: '密码4',
-          code: 'qwde',
-          type: 'text'
         }
       ],
-      formData: {}
+      formData: {
+        name: '123'
+      }
     });
 
     return {

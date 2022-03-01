@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-01 17:23:06
- * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-01 22:05:00
+ * @FilePath: /vue3-ts-init/src/base-ui/form/src/form.vue
 -->
 <template>
   <div class="v-form">
@@ -16,7 +16,10 @@
               :rules="item.rules || rules[item.code]"
               :prop="item.code"
             >
-              <el-input v-model="formData[item.code]"></el-input>
+              <el-input
+                :modelValue="formData[item.code]"
+                @update:modelValue="handleValueChange($event, item.code)"
+              ></el-input>
             </el-form-item>
           </el-col>
         </template>
@@ -73,15 +76,20 @@ export default defineComponent({
     const formData = reactive<formDataType>({ ...props.modelValue });
 
     for (const item of props.itemInfo) {
-      formData[item.code] = '';
+      formData[item.code] ? formData[item.code] : (formData[item.code] = '');
     }
 
-    emit('update:modelValue', formData);
+    // emit('update:modelValue', formData);
+    const handleValueChange = (value: any, code: any) => {
+      Object.assign(formData, { [code]: value });
+      emit('update:modelValue', { ...formData });
+    };
 
     return {
       formRef,
       formData,
-      rules
+      rules,
+      handleValueChange
     };
   }
 });
