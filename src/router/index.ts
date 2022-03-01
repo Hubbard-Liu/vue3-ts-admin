@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 14:52:12
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 16:38:01
+ * @LastEditTime: 2022-03-01 16:05:16
  * @FilePath: \vue3-ts-init\src\router\index.ts
  */
 import { createRouter, createWebHistory } from 'vue-router';
@@ -13,7 +13,7 @@ import layout from '@/layout/index.vue';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/main'
+    redirect: '/main/analysis/dashboard'
   },
   {
     name: 'login',
@@ -24,6 +24,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'main',
     path: '/main',
+    redirect: '/main/analysis/dashboard',
     component: layout,
     children: []
   },

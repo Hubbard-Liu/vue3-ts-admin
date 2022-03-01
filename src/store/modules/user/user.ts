@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-09 14:00:15
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-24 10:34:41
+ * @LastEditTime: 2022-03-01 10:36:04
  * @FilePath: \vue3-ts-init\src\store\modules\user\user.ts
  */
 import { ActionContext } from 'vuex';
@@ -454,7 +454,8 @@ const actions = {
         // 最后动态添加404跳转,静态添加的404有优先权导致直接匹配不到就404
         router.addRoute({
           path: '/:pathMatch(.*)*',
-          redirect: '/404'
+          redirect: '/404',
+          name: '404'
         });
 
         // 生成动态menu

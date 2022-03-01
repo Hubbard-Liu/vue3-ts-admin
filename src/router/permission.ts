@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-11 14:23:40
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 17:37:53
+ * @LastEditTime: 2022-02-28 18:00:05
  * @FilePath: \vue3-ts-init\src\router\permission.ts
  */
 import { Router } from 'vue-router';
@@ -10,6 +10,7 @@ import store from '@/store';
 import { ElMessage } from 'element-plus';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+// import {debounce} from '@/utils/lodashChunk';
 
 NProgress.configure({ showSpinner: false });
 
@@ -36,7 +37,7 @@ export function createRouterGuards(router: Router) {
              * 如果参数to不能找到对应的路由的话，就再执行一次beforeEach((to, from, next))直到其中的next({ ...to})能找到对应的路由为止。
              * replace 禁止用户手动返回
              */
-            next({ path: to.path });
+            next({ ...to, replace: true });
           } catch (err) {
             const error = err as string;
             ElMessage.error(error.toString());
@@ -50,7 +51,7 @@ export function createRouterGuards(router: Router) {
       if (whiteList.includes(to.path)) {
         next();
       } else {
-        next({ path: '/login' });
+        next(`/login?redirect=${to.path}`);
       }
     }
   });

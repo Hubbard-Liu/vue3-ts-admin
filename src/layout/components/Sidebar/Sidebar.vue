@@ -1,14 +1,15 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 16:29:19
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-20 17:20:03
- * @FilePath: /vue3-ts-init/src/layout/components/Sidebar/Sidebar.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-01 11:41:36
+ * @FilePath: \vue3-ts-init\src\layout\components\Sidebar\Sidebar.vue
 -->
 <template>
   <el-scrollbar class="Sidebar">
     <!--  default-active="" 默认展开项 -->
     <el-menu
+      :default-active="defaultActive"
       class="el-menu-vertical"
       active-text-color="#669dfc"
       background-color="#3e4556"
@@ -26,9 +27,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import store from '@/store';
 import SidebarItemVue from './SidebarItem.vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'Sidebar',
@@ -43,8 +45,27 @@ export default defineComponent({
   setup() {
     const menuList = store.getters.userMenu ?? [];
 
+    // 默认展开项
+    const route = useRoute();
+    const menu = isActive(menuList, route.path);
+    const defaultActive = ref(menu.url);
+
+    function isActive(menuList: any, path: string): any {
+      for (const item of menuList) {
+        if (item?.children) {
+          const menu = isActive(item.children, path);
+          if (menu) {
+            return menu;
+          }
+        } else if (item.type !== 1 && path === item.url) {
+          return item;
+        }
+      }
+    }
+
     return {
-      menuList
+      menuList,
+      defaultActive
     };
   }
 });

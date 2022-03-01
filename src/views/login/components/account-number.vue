@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-01-20 22:53:27
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-20 15:35:34
- * @FilePath: /vue3-ts-init/src/views/login/components/account-number.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-01 11:45:10
+ * @FilePath: \vue3-ts-init\src\views\login\components\account-number.vue
 -->
 <template>
   <div class="account-number">
@@ -62,12 +62,13 @@ import { rules, rulesFormType } from '@/utils/rules';
 import { ElForm, ElMessage as $message } from 'element-plus';
 import storage from '@/utils/storage';
 import store from '@/store';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'accountNumber',
   setup() {
     const router = useRouter();
+    const route = useRoute();
 
     // 数据
     const account: rulesFormType = reactive({
@@ -160,7 +161,12 @@ export default defineComponent({
               storage.set('auth', formData.value);
             }
             $message.success('登录成功');
-            router.replace('/');
+
+            // 历史路由跳转 decodeURIComponent格式化路径
+            const redirect = decodeURIComponent(
+              (route.query.redirect || '/') as string
+            );
+            router.replace(redirect);
             return true;
           })
           .catch(() => {

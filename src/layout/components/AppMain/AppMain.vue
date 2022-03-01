@@ -2,12 +2,14 @@
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 14:09:14
+ * @LastEditTime: 2022-03-01 16:26:22
  * @FilePath: \vue3-ts-init\src\layout\components\AppMain\AppMain.vue
 -->
 <template>
   <div class="AppMain">
-    <router-view></router-view>
+    <div class="AppMain-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -31,5 +33,9 @@ export default defineComponent({
   height: calc(100vh - $navbarHeight);
   background-color: #fff;
   overflow: hidden;
+
+  &-content {
+    width: 100%;
+  }
 }
 </style>

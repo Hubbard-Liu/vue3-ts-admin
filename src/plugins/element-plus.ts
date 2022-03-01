@@ -1,9 +1,9 @@
 /*
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-20 14:53:09
- * @FilePath: /vue3-ts-init/src/plugins/element-plus.ts
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-02-28 17:00:15
+ * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
  */
 import type { App } from 'vue';
 import 'element-plus/dist/index.css';
@@ -65,6 +65,7 @@ export default (app: App): void => {
   for (const component of components) {
     app.use(component);
   }
+  // 全局注册icons
   for (const icon in ElIcons) {
     app.component(icon, (ElIcons as any)[icon]);
   }
