@@ -1,25 +1,25 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-03-01 22:05:00
- * @FilePath: /vue3-ts-init/src/base-ui/form/src/form.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-02 16:15:49
+ * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
 -->
 <template>
   <div class="v-form">
     <el-form ref="formRef" :label-width="labelWidth" :model="formData">
       <el-row>
         <template v-for="item in itemInfo" :key="item.code">
-          <el-col v-bind="span">
+          <el-col v-bind="item.span || layoutSpan">
             <el-form-item
               :label="item.label"
               :rules="item.rules || rules[item.code]"
               :prop="item.code"
             >
-              <el-input
-                :modelValue="formData[item.code]"
-                @update:modelValue="handleValueChange($event, item.code)"
-              ></el-input>
+              <v-item
+                v-model="formData[item.code]"
+                :currentItem="item"
+              ></v-item>
             </el-form-item>
           </el-col>
         </template>
@@ -29,19 +29,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType, reactive } from 'vue';
-import { ElForm } from 'element-plus';
+import { defineComponent, ref, PropType, reactive, watch } from 'vue';
 import type { itemInfoType, formDataType } from '../type/type';
 import { rules } from '@/utils/rules';
+import { ElForm } from 'element-plus';
+import VItem from '../../item';
 
 export default defineComponent({
   name: 'v-form',
+  components: { VItem },
   props: {
     labelWidth: {
       type: String,
       default: '80px'
     },
-    span: {
+    layoutSpan: {
       type: Object,
       default: () => {
         return {
@@ -79,17 +81,21 @@ export default defineComponent({
       formData[item.code] ? formData[item.code] : (formData[item.code] = '');
     }
 
-    // emit('update:modelValue', formData);
-    const handleValueChange = (value: any, code: any) => {
-      Object.assign(formData, { [code]: value });
-      emit('update:modelValue', { ...formData });
-    };
+    emit('update:modelValue', { ...formData });
+
+    watch(formData, (newValue) => {
+      emit('update:modelValue', { ...newValue });
+    });
+
+    // const handleValueChange = (value: any, code: string) => {
+    //   Object.assign(formData, { [code]: value });
+    //   emit('update:modelValue', { ...formData });
+    // };
 
     return {
       formRef,
       formData,
-      rules,
-      handleValueChange
+      rules
     };
   }
 });
