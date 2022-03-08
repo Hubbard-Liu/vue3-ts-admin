@@ -2,25 +2,25 @@
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-02 18:56:29
+ * @LastEditTime: 2022-03-08 17:12:48
  * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <v-from v-bind="formConfig" v-model="formConfig.formData"></v-from>
+    <VSearch :searchConfig="formConfig"></VSearch>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import VFrom from '@/base-ui/form';
+import VSearch from '@/components/v-search';
 
 export default defineComponent({
   name: 'dashboard',
-  components: { VFrom },
+  components: { VSearch },
   setup() {
-    const formConfig = reactive({
+    const formConfig: any = reactive({
       itemInfo: [
         {
           label: '账号',
@@ -73,6 +73,11 @@ export default defineComponent({
         {
           label: '时间',
           code: 'text4',
+          type: 'datePicker'
+        },
+        {
+          label: '日期',
+          code: 'text22',
           type: 'datePicker'
         }
       ],

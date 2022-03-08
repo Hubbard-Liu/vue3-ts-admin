@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-02 16:15:49
+ * @LastEditTime: 2022-03-08 17:08:01
  * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
 -->
 <template>
@@ -23,6 +23,12 @@
             </el-form-item>
           </el-col>
         </template>
+
+        <el-col :span="6" class="v-form-button">
+          <slot name="button"></slot>
+          <el-button type="primary" icon="search">查询</el-button>
+          <el-button icon="refresh">重置</el-button>
+        </el-col>
       </el-row>
     </el-form>
   </div>
@@ -81,11 +87,19 @@ export default defineComponent({
       formData[item.code] ? formData[item.code] : (formData[item.code] = '');
     }
 
+    if (Object.keys(formData).length !== props.itemInfo.length) {
+      throw new Error('表单有重复code项!');
+    }
+
     emit('update:modelValue', { ...formData });
 
-    watch(formData, (newValue) => {
-      emit('update:modelValue', { ...newValue });
-    });
+    watch(
+      formData,
+      (newValue) => {
+        emit('update:modelValue', { ...newValue });
+      },
+      { deep: true }
+    );
 
     // const handleValueChange = (value: any, code: string) => {
     //   Object.assign(formData, { [code]: value });
@@ -101,4 +115,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-form-button {
+  display: flex;
+  justify-content: end;
+  margin-left: auto;
+}
+</style>

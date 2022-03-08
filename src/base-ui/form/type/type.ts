@@ -2,37 +2,40 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 15:02:30
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-02 18:42:47
+ * @LastEditTime: 2022-03-03 15:57:45
  * @FilePath: \vue3-ts-init\src\base-ui\form\type\type.ts
  */
-export type itemInfoType = baseType &
-  selectType &
-  textareaType &
-  datePickerType;
+export type itemInfoType = base & selectType & textareaType & datePickerType;
 
-interface baseType {
+interface base {
   code: string;
   type: string;
   label: string;
+}
+interface baseType {
+  type?: string;
   rules?: any;
   span?: spanType;
   disabled?: boolean;
   size?: string;
   clearable?: boolean;
+  placeholder?: string;
 }
 
-interface selectType<O = any> {
+export interface selectType<O = any> extends baseType {
   options?: O;
 }
 
-interface textareaType {
+export interface textareaType extends baseType {
   span?: spanType;
   format?: string;
   rows?: number;
   showWordLimit?: boolean;
+  maxlength?: number;
+  showPassword?: boolean;
 }
 
-interface datePickerType {
+export interface datePickerType extends baseType {
   format?: string;
   valueFormat?: string;
   showWordLimit?: boolean;
