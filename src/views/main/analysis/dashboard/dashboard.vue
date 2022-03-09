@@ -2,18 +2,18 @@
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-08 17:12:48
+ * @LastEditTime: 2022-03-09 17:16:47
  * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <VSearch :searchConfig="formConfig"></VSearch>
+    <VSearch :searchConfig="formConfig" v-model:form="form"></VSearch>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import VSearch from '@/components/v-search';
 
 export default defineComponent({
@@ -80,15 +80,14 @@ export default defineComponent({
           code: 'text22',
           type: 'datePicker'
         }
-      ],
-      formData: {
-        name: '123',
-        select: 'Option2'
-      }
+      ]
     });
 
+    const form = ref({});
+
     return {
-      formConfig
+      formConfig,
+      form
     };
   }
 });

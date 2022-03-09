@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 17:03:35
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-03 16:04:34
+ * @LastEditTime: 2022-03-09 18:10:53
  * @FilePath: \vue3-ts-init\src\base-ui\item\src\item.vue
 -->
 <template>
@@ -10,7 +10,7 @@
     <template v-if="['text', 'password', 'textarea'].includes(currentType)">
       <el-input
         v-bind="config"
-        :modelValue="modelValue"
+        :modelValue="itemValue"
         @update:modelValue="handleValueChange($event)"
       ></el-input>
     </template>
@@ -18,7 +18,7 @@
     <template v-else-if="currentType === 'select'">
       <el-select
         v-bind="config"
-        :modelValue="modelValue"
+        :modelValue="itemValue"
         @update:modelValue="handleValueChange($event)"
       >
         <el-option
@@ -36,7 +36,7 @@
       <el-date-picker
         style="width: 100%"
         v-bind="config"
-        :modelValue="modelValue"
+        :modelValue="itemValue"
         @update:modelValue="handleValueChange($event)"
       >
       </el-date-picker>
@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+import { defineComponent, PropType, computed, ref, watch } from 'vue';
 import type { itemDataType, ICurrentType } from '../type/type';
 import { itemConfig } from '../config/config';
 
@@ -53,7 +53,7 @@ export default defineComponent({
   name: 'v-item',
   props: {
     // 表单value
-    modelValue: {
+    formItemValue: {
       type: [String, Number, Array, Object, Boolean]
     },
     // 当前item
@@ -64,11 +64,21 @@ export default defineComponent({
       }
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:formItemValue'],
   setup(props, { emit }) {
+    const itemValue = ref(props.formItemValue);
+
+    watch(
+      () => props.formItemValue,
+      (value) => {
+        itemValue.value = value;
+      }
+    );
+
     // value传值
     const handleValueChange = (value: any) => {
-      emit('update:modelValue', value);
+      itemValue.value = value;
+      emit('update:formItemValue', value);
     };
 
     // 类型
@@ -83,7 +93,8 @@ export default defineComponent({
     return {
       handleValueChange,
       config,
-      currentType
+      currentType,
+      itemValue
     };
   }
 });

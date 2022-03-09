@@ -2,12 +2,12 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-08 17:08:01
+ * @LastEditTime: 2022-03-09 17:38:49
  * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
 -->
 <template>
   <div class="v-form">
-    <el-form ref="formRef" :label-width="labelWidth" :model="formData">
+    <el-form ref="formRef" :label-width="labelWidth" :model="modelValue">
       <el-row>
         <template v-for="item in itemInfo" :key="item.code">
           <el-col v-bind="item.span || layoutSpan">
@@ -16,8 +16,13 @@
               :rules="item.rules || rules[item.code]"
               :prop="item.code"
             >
+              <!-- v-model="formData[item.code]" -->
+              <!-- :formItem="formData[item.code]" -->
+              <!-- @update:modelValue="handleValueChange($event, item.code)" -->
               <v-item
-                v-model="formData[item.code]"
+                :key="item.code"
+                :formItemValue="modelValue[item.code]"
+                @update:formItemValue="handleChange($event, item.code)"
                 :currentItem="item"
               ></v-item>
             </el-form-item>
@@ -81,35 +86,27 @@ export default defineComponent({
     const formRef = ref<InstanceType<typeof ElForm>>();
 
     // 组件 v-model
-    const formData = reactive<formDataType>({ ...props.modelValue });
+    // const formData = reactive<formDataType>({ ...props.modelValue });
 
-    for (const item of props.itemInfo) {
-      formData[item.code] ? formData[item.code] : (formData[item.code] = '');
-    }
+    // for (const item of props.itemInfo) {
+    //   formData[item.code] ? formData[item.code] : (formData[item.code] = '');
+    // }
 
-    if (Object.keys(formData).length !== props.itemInfo.length) {
-      throw new Error('表单有重复code项!');
-    }
+    // if (Object.keys(formData).length !== props.itemInfo.length) {
+    //   throw new Error('表单有重复code项!');
+    // }
 
-    emit('update:modelValue', { ...formData });
+    // emit('update:modelValue', { ...formData });
 
-    watch(
-      formData,
-      (newValue) => {
-        emit('update:modelValue', { ...newValue });
-      },
-      { deep: true }
-    );
-
-    // const handleValueChange = (value: any, code: string) => {
-    //   Object.assign(formData, { [code]: value });
-    //   emit('update:modelValue', { ...formData });
-    // };
+    const handleChange = (value: any, code: string) => {
+      emit('update:modelValue', { ...props.modelValue, [code]: value });
+    };
 
     return {
       formRef,
-      formData,
-      rules
+      // formData,
+      rules,
+      handleChange
     };
   }
 });
