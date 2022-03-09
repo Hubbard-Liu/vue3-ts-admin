@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-09 17:38:49
- * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-09 22:21:33
+ * @FilePath: /vue3-ts-init/src/base-ui/form/src/form.vue
 -->
 <template>
   <div class="v-form">
@@ -16,9 +16,6 @@
               :rules="item.rules || rules[item.code]"
               :prop="item.code"
             >
-              <!-- v-model="formData[item.code]" -->
-              <!-- :formItem="formData[item.code]" -->
-              <!-- @update:modelValue="handleValueChange($event, item.code)" -->
               <v-item
                 :key="item.code"
                 :formItemValue="modelValue[item.code]"
@@ -29,10 +26,12 @@
           </el-col>
         </template>
 
+        <!-- 自定义模板 -->
+        <slot name="temp"></slot>
+
+        <!-- 自定义按钮 -->
         <el-col :span="6" class="v-form-button">
           <slot name="button"></slot>
-          <el-button type="primary" icon="search">查询</el-button>
-          <el-button icon="refresh">重置</el-button>
         </el-col>
       </el-row>
     </el-form>
@@ -40,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType, reactive, watch } from 'vue';
+import { defineComponent, ref, PropType } from 'vue';
 import type { itemInfoType, formDataType } from '../type/type';
 import { rules } from '@/utils/rules';
 import { ElForm } from 'element-plus';
@@ -50,10 +49,12 @@ export default defineComponent({
   name: 'v-form',
   components: { VItem },
   props: {
+    // 全局宽度
     labelWidth: {
       type: String,
       default: '80px'
     },
+    // 响应式布局
     layoutSpan: {
       type: Object,
       default: () => {
@@ -85,26 +86,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const formRef = ref<InstanceType<typeof ElForm>>();
 
-    // 组件 v-model
-    // const formData = reactive<formDataType>({ ...props.modelValue });
-
-    // for (const item of props.itemInfo) {
-    //   formData[item.code] ? formData[item.code] : (formData[item.code] = '');
-    // }
-
-    // if (Object.keys(formData).length !== props.itemInfo.length) {
-    //   throw new Error('表单有重复code项!');
-    // }
-
-    // emit('update:modelValue', { ...formData });
-
     const handleChange = (value: any, code: string) => {
       emit('update:modelValue', { ...props.modelValue, [code]: value });
     };
 
     return {
       formRef,
-      // formData,
       rules,
       handleChange
     };

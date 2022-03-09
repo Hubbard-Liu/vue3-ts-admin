@@ -1,19 +1,19 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-09 17:16:47
- * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-09 22:21:59
+ * @FilePath: /vue3-ts-init/src/views/main/analysis/dashboard/dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <VSearch :searchConfig="formConfig" v-model:form="form"></VSearch>
+    <VSearch :searchConfig="formConfig"> </VSearch>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import VSearch from '@/components/v-search';
 
 export default defineComponent({
@@ -83,11 +83,8 @@ export default defineComponent({
       ]
     });
 
-    const form = ref({});
-
     return {
-      formConfig,
-      form
+      formConfig
     };
   }
 });

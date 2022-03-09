@@ -1,12 +1,13 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 17:03:35
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-09 18:10:53
- * @FilePath: \vue3-ts-init\src\base-ui\item\src\item.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-09 21:58:48
+ * @FilePath: /vue3-ts-init/src/base-ui/item/src/item.vue
 -->
 <template>
   <div class="v-item">
+    <!-- 输入框 -->
     <template v-if="['text', 'password', 'textarea'].includes(currentType)">
       <el-input
         v-bind="config"
@@ -15,8 +16,10 @@
       ></el-input>
     </template>
 
+    <!-- 下拉框 -->
     <template v-else-if="currentType === 'select'">
       <el-select
+        style="width: 100%"
         v-bind="config"
         :modelValue="itemValue"
         @update:modelValue="handleValueChange($event)"
@@ -32,6 +35,7 @@
       </el-select>
     </template>
 
+    <!-- 时间选择器 -->
     <template v-else-if="currentType === 'datePicker'">
       <el-date-picker
         style="width: 100%"
@@ -52,22 +56,26 @@ import { itemConfig } from '../config/config';
 export default defineComponent({
   name: 'v-item',
   props: {
-    // 表单value
+    // 传递的value
     formItemValue: {
-      type: [String, Number, Array, Object, Boolean]
+      type: [String, Number, Array, Object, Boolean],
+      required: true
     },
     // 当前item
     currentItem: {
       type: Object as PropType<itemDataType>,
       default: () => {
         return {};
-      }
+      },
+      required: true
     }
   },
   emits: ['update:formItemValue'],
   setup(props, { emit }) {
+    // 当前父数据
     const itemValue = ref(props.formItemValue);
 
+    // 监听父数据的变化
     watch(
       () => props.formItemValue,
       (value) => {
