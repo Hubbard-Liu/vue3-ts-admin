@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-03-09 22:21:33
- * @FilePath: /vue3-ts-init/src/base-ui/form/src/form.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-10 09:25:25
+ * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
 -->
 <template>
   <div class="v-form">
@@ -40,9 +40,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, PropType } from 'vue';
-import type { itemInfoType, formDataType } from '../type/type';
 import { rules } from '@/utils/rules';
-import { ElForm } from 'element-plus';
+import type { ElForm } from 'element-plus';
+import type { itemInfoType, formDataType } from '../type/type';
 import VItem from '../../item';
 
 export default defineComponent({
@@ -102,7 +102,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .v-form-button {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-left: auto;
 }
 </style>

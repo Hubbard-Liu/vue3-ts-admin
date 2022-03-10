@@ -1,26 +1,27 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-03-09 22:21:59
- * @FilePath: /vue3-ts-init/src/views/main/analysis/dashboard/dashboard.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-10 11:22:15
+ * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <VSearch :searchConfig="formConfig"> </VSearch>
+    <el-button @click="edit">----</el-button>
+    <VSearch ref="searchRef" v-bind="formConfig"> </VSearch>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import VSearch from '@/components/v-search';
 
 export default defineComponent({
   name: 'dashboard',
   components: { VSearch },
   setup() {
-    const formConfig: any = reactive({
+    const formConfig = reactive({
       itemInfo: [
         {
           label: '账号',
@@ -80,11 +81,22 @@ export default defineComponent({
           code: 'text22',
           type: 'datePicker'
         }
-      ]
+      ],
+      form: {
+        name: '123'
+      }
     });
 
+    const searchRef = ref();
+
+    const edit = () => {
+      searchRef.value.searchData.name = '6';
+    };
+
     return {
-      formConfig
+      formConfig,
+      edit,
+      searchRef
     };
   }
 });
