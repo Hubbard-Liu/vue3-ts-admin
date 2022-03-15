@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-16 15:29:03
- * @LastEditors: Liuyu
- * @LastEditTime: 2022-02-20 17:22:33
- * @FilePath: /vue3-ts-init/src/layout/index.vue
+ * @LastEditors: LiuYu
+ * @LastEditTime: 2022-03-14 14:58:20
+ * @FilePath: \vue3-ts-init\src\layout\index.vue
 -->
 <template>
   <div class="layout" :class="{ hidden: !isCollapse }">
@@ -47,7 +47,6 @@ export default defineComponent({
   position: relative;
   height: 100%;
   width: 100%;
-  overflow: hidden;
 
   &-sidebar {
     position: fixed;
@@ -70,12 +69,18 @@ export default defineComponent({
     transition: width 0.28s, margin-left 0.28s;
 
     &-navbar {
-      position: relative;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: calc(100% - $sidebarWidth);
       box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+      transition: width 0.28s, margin-left 0.28s;
+      z-index: 999;
     }
   }
 }
 
+// 切换隐藏部分
 .layout.hidden {
   .layout-sidebar {
     width: 64px;
@@ -84,6 +89,10 @@ export default defineComponent({
   .layout-main {
     margin-left: 64px;
     width: calc(100% - 64px);
+
+    &-navbar {
+      width: calc(100% - 64px);
+    }
   }
 }
 </style>

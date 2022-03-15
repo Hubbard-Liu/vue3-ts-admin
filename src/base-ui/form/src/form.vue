@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-10 09:25:25
+ * @LastEditTime: 2022-03-14 14:18:17
  * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
 -->
 <template>
@@ -18,9 +18,9 @@
             >
               <v-item
                 :key="item.code"
+                :currentItem="item"
                 :formItemValue="modelValue[item.code]"
                 @update:formItemValue="handleChange($event, item.code)"
-                :currentItem="item"
               ></v-item>
             </el-form-item>
           </el-col>
@@ -42,7 +42,7 @@
 import { defineComponent, ref, PropType } from 'vue';
 import { rules } from '@/utils/rules';
 import type { ElForm } from 'element-plus';
-import type { itemInfoType, formDataType } from '../type/type';
+import type { itemInfoType, formDataType, IFormMethods } from '../type/type';
 import VItem from '../../item';
 
 export default defineComponent({
@@ -90,10 +90,28 @@ export default defineComponent({
       emit('update:modelValue', { ...props.modelValue, [code]: value });
     };
 
+    // 表单方法
+    const formMethods: IFormMethods = {
+      // 重置表单
+      resetForm: () => {
+        formRef.value?.resetFields();
+      },
+
+      // 表单验证
+      validateForm: () => {
+        let flag = false;
+        formRef.value?.validate((result) => {
+          flag = result ? true : false;
+        });
+        return flag;
+      }
+    };
+
     return {
       formRef,
       rules,
-      handleChange
+      handleChange,
+      formMethods
     };
   }
 });

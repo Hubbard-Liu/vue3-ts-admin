@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-01-11 15:16:04
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-02 17:16:39
+ * @LastEditTime: 2022-03-14 15:08:00
  * @FilePath: \vue3-ts-init\src\plugins\element-plus.ts
  */
 import type { App } from 'vue';
@@ -33,7 +33,9 @@ import {
   ElMenuItemGroup,
   ElScrollbar,
   ElSelect,
-  ElDatePicker
+  ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 } from 'element-plus';
 import * as ElIcons from '@element-plus/icons-vue';
 
@@ -62,7 +64,9 @@ const components = [
   ElMenuItemGroup,
   ElScrollbar,
   ElSelect,
-  ElDatePicker
+  ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 ];
 
 export default (app: App): void => {

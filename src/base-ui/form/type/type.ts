@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-03-01 15:02:30
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-03 15:57:45
+ * @LastEditTime: 2022-03-14 14:15:36
  * @FilePath: \vue3-ts-init\src\base-ui\form\type\type.ts
  */
 export type itemInfoType = base & selectType & textareaType & datePickerType;
@@ -52,4 +52,9 @@ interface spanType {
 
 export interface formDataType<T = any> {
   [key: string]: T;
+}
+
+export interface IFormMethods {
+  validateForm(): boolean;
+  resetForm(): void;
 }

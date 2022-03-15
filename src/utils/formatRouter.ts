@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-22 17:08:50
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-02-23 15:40:35
+ * @LastEditTime: 2022-03-15 17:00:35
  * @FilePath: \vue3-ts-init\src\utils\formatRouter.ts
  */
 import type { RouteRecordRaw } from 'vue-router';
@@ -65,4 +65,29 @@ export default function formatRouter(menuList: IMenu[]) {
     });
     return routes;
   }
+}
+
+// 获取当前面包屑路径
+export function formatMenuPath(
+  menuList: IMenu[],
+  path: string,
+  pathMapBreadcrumbs = [] as any[]
+) {
+  menuList.forEach((item: IMenu) => {
+    if (item.children) {
+      item.children.forEach((childItem) => {
+        if (childItem.url === path) {
+          pathMapBreadcrumbs.push({ name: item.name });
+        }
+      });
+
+      formatMenuPath(item.children, path, pathMapBreadcrumbs);
+    }
+
+    if (item?.url === path) {
+      pathMapBreadcrumbs.push({ name: item.name, path: item.url });
+    }
+  });
+
+  return pathMapBreadcrumbs;
 }

@@ -2,13 +2,12 @@
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-10 11:22:15
+ * @LastEditTime: 2022-03-14 11:04:32
  * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <el-button @click="edit">----</el-button>
     <VSearch ref="searchRef" v-bind="formConfig"> </VSearch>
   </div>
 </template>
@@ -87,15 +86,10 @@ export default defineComponent({
       }
     });
 
-    const searchRef = ref();
-
-    const edit = () => {
-      searchRef.value.searchData.name = '6';
-    };
+    const searchRef = ref<InstanceType<typeof VSearch>>();
 
     return {
       formConfig,
-      edit,
       searchRef
     };
   }

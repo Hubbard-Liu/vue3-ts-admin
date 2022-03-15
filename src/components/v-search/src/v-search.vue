@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-03-03 16:48:49
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-10 11:24:40
+ * @LastEditTime: 2022-03-14 14:19:37
  * @FilePath: \vue3-ts-init\src\components\v-search\src\v-search.vue
 -->
 <template>
@@ -11,6 +11,7 @@
       <slot name="header"></slot>
 
       <v-from
+        ref="VFormRef"
         :itemInfo="searchInfo"
         :layoutSpan="layoutSpan"
         v-model="searchData"
@@ -18,8 +19,10 @@
       >
         <!-- 搜索按钮 -->
         <template #button>
-          <el-button type="primary" icon="search">查询</el-button>
-          <el-button icon="refresh">重置</el-button>
+          <el-button type="primary" icon="search" @click="handleSearch"
+            >查询</el-button
+          >
+          <el-button icon="refresh" @click="handleReset">重置</el-button>
         </template>
       </v-from>
 
@@ -84,7 +87,10 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  setup(props) {
+  emits: ['handleSearch'],
+  setup(props, { emit }) {
+    const VFormRef = ref<InstanceType<typeof VFrom>>();
+
     // 初始化
     onBeforeMount(() => {
       initSearchData(searchOriginData);
@@ -109,15 +115,30 @@ export default defineComponent({
     // 向下传递响应式的数据
     const searchData = ref(searchOriginData);
 
+    // 搜索按钮
+    const handleSearch = () => {
+      // 表单验证
+      const flag = VFormRef.value?.formMethods?.validateForm();
+      flag ? emit('handleSearch', { ...searchData.value }) : '';
+    };
+
+    // 重置表单
+    const handleReset = () => {
+      VFormRef.value?.formMethods?.resetForm();
+    };
+
     return {
+      VFormRef,
       searchInfo,
-      searchData
+      searchData,
+      handleSearch,
+      handleReset
     };
   }
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-search-card {
   padding-top: 10px;
 }

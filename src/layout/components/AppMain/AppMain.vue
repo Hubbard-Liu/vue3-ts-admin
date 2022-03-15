@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2022-02-16 16:28:41
  * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-10 09:29:29
+ * @LastEditTime: 2022-03-14 15:05:18
  * @FilePath: \vue3-ts-init\src\layout\components\AppMain\AppMain.vue
 -->
 <template>
@@ -38,10 +38,11 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   padding: 10px;
+  padding-top: 60px;
   width: 100%;
-  height: calc(100vh - $navbarHeight);
+  min-height: 100vh;
   background-color: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
 
   &-content {
     width: 100%;
