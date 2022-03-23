@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-01 14:09:46
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-14 14:18:17
- * @FilePath: \vue3-ts-init\src\base-ui\form\src\form.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-23 23:25:15
+ * @FilePath: /vue3-ts-init/src/base-ui/form/src/form.vue
 -->
 <template>
   <div class="v-form">
@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType } from 'vue';
+import { defineComponent, ref, PropType, onMounted } from 'vue';
 import { rules } from '@/utils/rules';
 import type { ElForm } from 'element-plus';
 import type { itemInfoType, formDataType, IFormMethods } from '../type/type';
@@ -84,8 +84,13 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    // 当页面加载完毕,抛出绑定的所有值
+    onMounted(() => {
+      emit('update:modelValue', { ...props.modelValue });
+    });
     const formRef = ref<InstanceType<typeof ElForm>>();
 
+    // 向父组件传递动态数据
     const handleChange = (value: any, code: string) => {
       emit('update:modelValue', { ...props.modelValue, [code]: value });
     };

@@ -1,14 +1,15 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-02-22 17:02:58
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-14 11:04:32
- * @FilePath: \vue3-ts-init\src\views\main\analysis\dashboard\dashboard.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-23 23:22:27
+ * @FilePath: /vue3-ts-init/src/views/main/analysis/dashboard/dashboard.vue
 -->
 <template>
   <div class="dashboard">
     <h2>dashboard</h2>
-    <VSearch ref="searchRef" v-bind="formConfig"> </VSearch>
+    <VSearch ref="searchRef" v-bind="formConfig" v-model="formConfig.form">
+    </VSearch>
   </div>
 </template>
 

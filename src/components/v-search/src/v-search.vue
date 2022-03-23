@@ -1,9 +1,9 @@
 <!--
  * @Author: Do not edit
  * @Date: 2022-03-03 16:48:49
- * @LastEditors: LiuYu
- * @LastEditTime: 2022-03-14 14:19:37
- * @FilePath: \vue3-ts-init\src\components\v-search\src\v-search.vue
+ * @LastEditors: Liuyu
+ * @LastEditTime: 2022-03-23 23:29:51
+ * @FilePath: /vue3-ts-init/src/components/v-search/src/v-search.vue
 -->
 <template>
   <div class="v-search">
@@ -12,9 +12,10 @@
 
       <v-from
         ref="VFormRef"
-        :itemInfo="searchInfo"
+        :itemInfo="itemInfo"
         :layoutSpan="layoutSpan"
-        v-model="searchData"
+        :modelValue="searchData"
+        @update:modelValue="handleValue($event)"
         :labelWidth="labelWidth"
       >
         <!-- 搜索按钮 -->
@@ -32,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, PropType, ref, onBeforeMount } from 'vue';
+import { defineComponent, PropType, ref, onBeforeMount, watch } from 'vue';
 import VFrom from '../../../base-ui/form';
 import type { itemInfoType } from '@/base-ui/form/type/type';
 import type { formData } from '../type/type';
@@ -82,12 +83,11 @@ export default defineComponent({
     /**
      * @form 为初始化数据 无响应式
      */
-    form: {
-      type: Object,
-      default: () => ({})
+    modelValue: {
+      type: Object
     }
   },
-  emits: ['handleSearch'],
+  emits: ['update:modelValue', 'handleSearch'],
   setup(props, { emit }) {
     const VFormRef = ref<InstanceType<typeof VFrom>>();
 
@@ -96,23 +96,23 @@ export default defineComponent({
       initSearchData(searchOriginData);
     });
 
-    const searchInfo = reactive(props.itemInfo);
-    const searchOriginData: formData = { ...props.form };
+    // const searchInfo = reactive(props.itemInfo);
+    const searchOriginData: formData = { ...props.modelValue };
 
     // 初始化formData
     const initSearchData = (searchOriginData: formData) => {
-      for (const item of searchInfo) {
+      for (const item of props.itemInfo) {
         searchOriginData[`${item.code}`]
           ? searchOriginData[`${item.code}`]
           : (searchOriginData[`${item.code}`] = '');
       }
 
-      if (Object.keys(searchOriginData).length !== searchInfo.length) {
+      if (Object.keys(searchOriginData).length !== props.itemInfo.length) {
         throw new Error('表单有重复code项!');
       }
     };
 
-    // 向下传递响应式的数据
+    // 向下传递响应式 数据
     const searchData = ref(searchOriginData);
 
     // 搜索按钮
@@ -127,12 +127,29 @@ export default defineComponent({
       VFormRef.value?.formMethods?.resetForm();
     };
 
+    // 监听子孙数据变化
+    const handleValue = (val: any) => {
+      searchData.value = val;
+      emit('update:modelValue', { ...val });
+    };
+
+    // // 监听父组件当前数据变化
+    watch(
+      () => props.modelValue,
+      (value) => {
+        searchData.value = { ...searchData.value, ...value };
+      },
+      {
+        deep: true
+      }
+    );
+
     return {
       VFormRef,
-      searchInfo,
       searchData,
       handleSearch,
-      handleReset
+      handleReset,
+      handleValue
     };
   }
 });
